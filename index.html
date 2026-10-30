@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FFF8EF">
+
+    <title>BREW & BOBA | Coffee and Milk Tea</title>
+    <meta name="description" content="Discover your favorite coffee and milk tea at Brew & Boba.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Dark Mode and Custom Colors -->
+    <style type="text/tailwindcss">
+        @custom-variant dark (&:where(.dark, .dark *));
+
+        @theme {
+            --color-cream: #FFF8EF;
+            --color-coffee: #493126;
+            --color-caramel: #DDA15E;
+            --color-coffee-light: #775642;
+            --color-espresso: #17110E;
+            --color-espresso-card: #261C17;
+            --color-dark-text: #F9EDE0;
+            --color-dark-muted: #D3BFAE;
+        }
+
+        @layer components {
+            .btn-primary {
+                @apply inline-flex items-center justify-center rounded-full bg-coffee px-6 py-3 font-bold text-white hover:bg-coffee-light dark:bg-caramel dark:text-espresso;
+            }
+
+            .menu-card {
+                @apply rounded-3xl border border-coffee/10 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-espresso-card md:p-6;
+            }
+
+            .eyebrow {
+                @apply text-xs font-bold uppercase tracking-[0.25em] text-coffee-light dark:text-caramel;
+            }
+        }
+    </style>
+
+    <!-- Restore Saved Theme -->
+    <script>
+        try {
+            if (
+                localStorage.getItem("brew-boba-theme") === "dark" ||
+                (!localStorage.getItem("brew-boba-theme") &&
+                window.matchMedia("(prefers-color-scheme: dark)").matches)
+            ) {
+                document.documentElement.classList.add("dark");
+            }
+        } catch (error) {}
+    </script>
+</head>
+
+<body class="bg-cream text-coffee antialiased dark:bg-espresso dark:text-dark-text">
+
+    <!-- Scroll Progress -->
+    <div id="scroll-progress"
+         class="fixed left-0 top-0 z-[60] h-1 w-full origin-left bg-caramel"
+         role="progressbar"
+         aria-label="Reading progress"
+         aria-valuemin="0"
+         aria-valuemax="100"
+         aria-valuenow="0"></div>
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 border-b border-coffee/10 bg-cream/95 backdrop-blur-md dark:border-white/10 dark:bg-espresso/95">
+        <nav class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 py-4 md:px-8">
+
+            <a href="#home" class="flex items-center gap-2 text-xl font-black">
+                <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-caramel text-xl">☕</span>
+                BREW <span class="text-caramel">&</span> BOBA
+            </a>
+
+            <div class="hidden items-center gap-5 text-sm font-semibold md:flex">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#menu">Our Menu</a>
+                <a href="#contact">Contact</a>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <button id="theme-toggle"
+                        type="button"
+                        class="rounded-full border border-coffee/20 px-3 py-2 text-sm font-semibold dark:border-white/20"
+                        aria-pressed="false">
+                    <span id="theme-icon">☾</span>
+                    <span id="theme-label">Dark</span>
+                </button>
+
+                <a href="#menu" class="hidden rounded-full bg-coffee px-5 py-2.5 text-sm font-bold text-white dark:bg-caramel dark:text-espresso sm:inline-flex">
+                    Explore Menu ↗
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- HERO SECTION -->
+        <section id="home" class="overflow-hidden px-5 py-16 md:px-8 md:py-24">
+            <div class="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2">
+
+                <div>
+                    <div class="hero-item mb-6 inline-flex rounded-full border border-coffee/15 bg-white px-4 py-2 text-sm font-semibold dark:border-white/10 dark:bg-espresso-card">
+                        🟤 Your daily dose of happiness
+                    </div>
+
+                    <h1 id="hero-title" class="hero-item text-5xl font-black leading-tight sm:text-6xl lg:text-7xl">
+                        Sip something
+                        <span class="text-caramel">wonderful.</span>
+                    </h1>
+
+                    <p class="hero-item mt-6 max-w-lg text-lg leading-8 text-coffee-light dark:text-dark-muted">
+                        From bold coffee to creamy milk tea, your next favorite drink is waiting for you.
+                    </p>
+
+                    <div class="hero-item mt-8 flex flex-wrap gap-4">
+                        <a href="#menu" class="btn-primary">Explore Our Menu ↗</a>
+
+                        <button id="replay-intro"
+                                type="button"
+                                class="rounded-full border border-coffee/20 px-6 py-3 font-bold dark:border-white/20">
+                            Replay Intro ↻
+                        </button>
+                    </div>
+
+                    <div class="hero-item mt-10 flex gap-8 border-t border-coffee/15 pt-6 dark:border-white/10">
+                        <div>
+                            <p class="text-2xl font-black">10</p>
+                            <p class="text-sm text-coffee-light dark:text-dark-muted">Signature Drinks</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-black">100%</p>
+                            <p class="text-sm text-coffee-light dark:text-dark-muted">Good Vibes</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-black">1 CUP</p>
+                            <p class="text-sm text-coffee-light dark:text-dark-muted">At a Time</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HERO PICTURE -->
+                <div class="hero-item relative mx-auto w-full max-w-lg">
+                    <div class="absolute -right-4 -top-4 h-40 w-40 rounded-full bg-caramel/30 blur-3xl"></div>
+
+                    <div class="relative rounded-[2rem] bg-[#F0E2D1] p-5 dark:bg-[#38271D] md:p-8">
+                        <div class="flex items-center justify-between">
+                            <span class="rounded-full bg-white px-4 py-2 text-xs font-bold uppercase tracking-widest text-coffee dark:bg-espresso-card dark:text-dark-text">
+                                Made for your mood
+                            </span>
+                            <span class="text-2xl">✳</span>
+                        </div>
+
+                        <img
+                            src="https://images.unsplash.com/photo-1558857563-b371033873b8?auto=format&fit=crop&w=900&q=85"
+                            alt="Refreshing milk tea with tapioca pearls"
+                            class="mt-6 h-80 w-full rounded-3xl object-cover shadow-lg"
+                            fetchpriority="high"
+                        >
+
+                        <div class="mt-5 flex items-center justify-between gap-3 rounded-2xl bg-white p-4 dark:bg-espresso-card">
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-widest text-coffee-light dark:text-dark-muted">Customer Favorite</p>
+                                <p class="mt-1 text-lg font-black">Brown Sugar Boba</p>
+                            </div>
+                            <span class="rounded-full bg-caramel px-3 py-2 text-xs font-black text-espresso">Must Try!</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="reveal px-5 py-16 dark:bg-espresso md:px-8 md:py-24">
+            <div class="mx-auto grid max-w-7xl gap-6 lg:grid-cols-2">
+
+                <div class="menu-card flex flex-col justify-center">
+                    <p class="eyebrow">01 / Our Story</p>
+                    <h2 class="mt-5 text-3xl font-black md:text-4xl">Good drinks. Great moments.</h2>
+                    <p class="mt-5 leading-8 text-coffee-light dark:text-dark-muted">
+                        BREW & BOBA brings coffee lovers and milk tea fans together.
+                        Enjoy delicious drinks and make every break a little more special.
+                    </p>
+                    <a href="#contact" class="mt-8 font-bold text-coffee-light dark:text-caramel">Get in touch →</a>
+                </div>
+
+                <div class="grid gap-5 sm:grid-cols-2">
+                    <article class="menu-card">
+                        <span class="text-3xl">☕</span>
+                        <h3 class="mt-5 text-lg font-black">Coffee Crafted</h3>
+                        <p class="mt-3 text-sm leading-7 text-coffee-light dark:text-dark-muted">
+                            Smooth coffee favorites for your everyday energy.
+                        </p>
+                    </article>
+
+                    <article class="menu-card">
+                        <span class="text-3xl">🧋</span>
+                        <h3 class="mt-5 text-lg font-black">Boba Happiness</h3>
+                        <p class="mt-3 text-sm leading-7 text-coffee-light dark:text-dark-muted">
+                            Creamy milk tea with chewy pearls in every sip.
+                        </p>
+                    </article>
+
+                    <article class="menu-card sm:col-span-2">
+                        <p class="eyebrow">Our Promise</p>
+                        <h3 class="mt-2 text-xl font-black">Your cup, your happy place.</h3>
+                        <p class="mt-2 text-sm leading-7 text-coffee-light dark:text-dark-muted">
+                            Great flavor, comfort, and connection in every cup.
+                        </p>
+                    </article>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- MENU SECTION -->
+        <section id="menu" class="reveal px-5 py-16 md:px-8 md:py-24">
+            <div class="mx-auto max-w-7xl">
+
+                <div class="mb-10">
+                    <p class="eyebrow">02 / The Good Stuff</p>
+                    <h2 class="mt-4 text-3xl font-black md:text-5xl">Meet your new favorite.</h2>
+                    <p class="mt-4 max-w-md leading-7 text-coffee-light dark:text-dark-muted">
+                        A little coffee, a little sweetness, and a whole lot of happiness.
+                    </p>
+                </div>
+
+                <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+
+                    <!-- 01 / CLASSIC ICED LATTE -->
+                    <article class="menu-card flex flex-col">
+                        <img
+                            src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=85"
+                            alt="Iced coffee latte"
+                            class="h-56 w-full rounded-2xl object-cover"
+                            loading="lazy"
+                        >
+
+                        <div class="mt-6 flex items-start justify-between gap-3">
+                            <div>
+                                <p class="eyebrow">01 / Coffee</p>
+                                <h3 class="mt-2 text-xl font-black">Classic Iced Latte</h3>
+                            </div>
+                            <span class="rounded-full bg-caramel/25 px-3 py-2 text-sm font-black">₱80</span>
+                        </div>
+
+                        <p class="mt-3 flex-1 leading-7 text-coffee-light dark:text-dark-muted">
+                            Smooth espresso and chilled milk served over ice.
+                        </p>
+                        <a href="#contact" class="mt-5 font-bold text-coffee-light dark:text-caramel">Ask About This Drink ↗</a>
+                    </article>
+
+                    <!-- 02 / BROWN SUGAR BOBA -->
+                    <article class="menu-card flex flex-col">
+                        <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp9uJ10kkAQ245_1MODf2yTePKBgMwdr92sx05XQdikg&s=10"
+                            alt="Brown sugar milk tea with tapioca pearls"
+                            class="h-56 w-full rounded-2xl object-cover"
+                            loading="lazy"
+                        >
+
+                        <div class="mt-6 flex items-start justify-between gap-3">
+                            <div>
+                                <p class="eyebrow">02 / Milk Tea</p>
+                                <h3 class="mt-2 text-xl font-black">Brown Sugar Boba</h3>
+                            </div>
+                            <span class="rounded-full bg-caramel/25 px-3 py-2 text-sm font-black">₱90</span>
+                        </div>
+
+                        <p class="mt-3 flex-1 leading-7 text-coffee-light dark:text-dark-muted">
+                            Creamy milk tea with brown sugar flavor and chewy pearls.
+                        </p>
+                        <a href="#contact" class="mt-5 font-bold text-coffee-light dark:text-caramel">Ask About This Drink ↗</a>
+                    </article>
+
+                    <!-- 03 / TARO MILK TEA -->
+                    <article class="menu-card flex flex-col">
+                        <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEa2JlLJsnvfcxKQT3s3GMpaNS6ztfdSWMePAtva-g2Q&s=10"
+                            alt="Purple Taro Milk Tea with Tapioca Pearls"
+                            class="h-56 w-full rounded-2xl object-cover"
+                            loading="lazy"
+                        >
+
+                        <div class="mt-6 flex items-start justify-between gap-3">
+                            <div>
+                                <p class="eyebrow">03 / Signature</p>
+                                <h3 class="mt-2 text-xl font-black">Taro Milk Tea</h3>
+                            </div>
+                            <span class="rounded-full bg-caramel/25 px-3 py-2 text-sm font-black">₱75</span>
+                        </div>
+
+                        <p class="mt-3 flex-1 leading-7 text-coffee-light dark:text-dark-muted">
+                            A sweet, creamy drink with a lovely purple color.
+                        </p>
+                        <a href="#contact" class="mt-5 font-bold text-coffee-light dark:text-caramel">Ask About This Drink ↗</a>
+                    </article>
+
+                    <!-- 04 / SPANISH LATTE -->
+                    <article class="menu-card flex flex-col">
+                        <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR07gHj5XXZthjmqQ6V6DGSzmteGV7CYWlkhcnepqBK-w&s=10"
+                            alt="Spanish latte served over ice"
+                            class="h-56 w-full rounded-2xl object-cover"
+                            loading="lazy"
+                        >
+
+                        <div class="mt-6 flex items-start justify-between gap-3">
+                            <div>
+                                <p class="eyebrow">04 / Coffee</p>
+                                <h3 class="mt-2 text-xl font-black">Spanish Latte</h3>
+                            </div>
+                            <span class="rounded-full bg-caramel/25 px-3 py-2 text-sm font-black">₱95</span>
+                        </div>
+
+                        <p class="mt-3 flex-1 leading-7 text-coffee-light dark:text-dark-muted">
+                            Rich espresso blended with creamy, lightly sweetened milk.
+                        </p>
+                        <a href="#contact" class="mt-5 font-bold text-coffee-light dark:text-caramel">Ask About This Drink ↗</a>
+                    </article>
+
+                    <!-- 05 / CARAMEL MACCHIATO -->
+                    <article class="menu-card flex flex-col">
+                        <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbVooyTrno-UX-ZxLnfnarGvuCQGzaPPjCqHKKqJ9moA&s=10"
+                            alt="Iced caramel macchiato coffee"
+                            class="h-56 w-full rounded-2xl object-cover"
+                            loading="lazy"
+                        >
+
+                        <div class="mt-6 flex items-start justify-between gap-3">
+                            <div>
+                                <p class="eyebrow">05 / Coffee</p>
+                                <h3 class="mt-2 text-xl font-black">Caramel Macchiato</h3>
+                            </div>
+                            <span class="rounded-full bg-caramel/25 px-3 py-2 text-sm font-black">₱100</span>
+                        </div>
+
+                        <p class="mt-3 flex-1 leading-7 text-coffee-light dark:text-dark-muted">
+                            Espresso, chilled milk, and a delicious caramel drizzle.
+                        </p>
+                        <a href="#contact" class="mt-5 font-bold text-coffee-light dark:text-caramel">Ask About This Drink ↗</a>
+                    </article>
+
+                    <!-- 06 / MOCHA FRAPPE -->
+                    <article class="menu-card flex flex-col">
+                        <img
+                            src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=85"
+                            alt="Chocolate coffee frappe"
+                            class="h-56 w-full rounded-2xl object-cover"
+                            loading="lazy"
+                        >
+
+                        <div class="mt-6 flex items-start justify-between gap-3">
+                            <div>
+                                <p class="eyebrow">06 / Coffee</p>
+                                <h3 class="mt-2 text-xl font-black">Mocha Frappe</h3>
+                            </div>
+                            <span class="rounded-full bg-caramel/25 px-3 py-2 text-sm font-black">₱110</span>
+                        </div>
+
+                        <p class="mt-3 flex-1 leading-7 text-coffee-light dark:text-dark-muted">
+                            A cool blended mix of coffee, chocolate, and creamy milk.
+                        </p>
+                        <a href="#contact" class="mt-5 font-bold text-coffee-light dark:text-caramel">Ask About This Drink ↗</a>
+                    </article>
+
+                    <!-- 07 / MATCHA MILK TEA -->
+                    <article class="menu-card flex flex-col">
+                        <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF5vh89FjS9_P7qSM2qLOgiRX1XQUbKl12C5EXxcXtFw&s=10"
+                            alt="Green matcha milk tea"
+                            class="h-56 w-full rounded-2xl object-cover"
+                            loading="lazy"
+                        >
+
+                        <div class="mt-6 flex items-start justify-between gap-3">
+                            <div>
+                                <p class="eyebrow">07 / Milk Tea</p>
+                                <h3 class="mt-2 text-xl font-black">Matcha Milk Tea</h3>
+                            </div>
+                            <span class="rounded-full bg-caramel/25 px-3 py-2 text-sm font-black">₱90</span>
+                        </div>
+
+                        <p class="mt-3 flex-1 leading-7 text-coffee-light dark:text-dark-muted">
+                            Earthy matcha green tea mixed with smooth and creamy milk.
+                        </p>
+                        <a href="#contact" class="mt-5 font-bold text-coffee-light dark:text-caramel">Ask About This Drink ↗</a>
+                    </article>
+
+                    <!-- 08 / WINTERMELON MILK TEA -->
+                    <article class="menu-card flex flex-col">
+                        <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxhFc4KM5kmebUNv364gTxNejvOXJlqBruKi4L42Ldhg&s=10"
+                            alt="Refreshing milk tea drink"
+                            class="h-56 w-full rounded-2xl object-cover"
+                            loading="lazy"
+                        >
+
+                        <div class="mt-6 flex items-start justify-between gap-3">
+                            <div>
+                                <p class="eyebrow">08 / Milk Tea</p>
+                                <h3 class="mt-2 text-xl font-black">Wintermelon Milk Tea</h3>
+                            </div>
+                            <span class="rounded-full bg-caramel/25 px-3 py-2 text-sm font-black">₱85</span>
+                        </div>
+
+                        <p class="mt-3 flex-1 leading-7 text-coffee-light dark:text-dark-muted">
+                            A mellow, sweet milk tea with a smooth wintermelon flavor.
+                        </p>
+                        <a href="#contact" class="mt-5 font-bold text-coffee-light dark:text-caramel">Ask About This Drink ↗</a>
+                    </article>
+
+                    <!-- 09 / STRAWBERRY MILK TEA -->
+                    <article class="menu-card flex flex-col">
+                        <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjmXvOnxAcvdMEfMRYw1wG1BzU5tfSMEDSFylZUI5LkQ&s=10"
+                            alt="Strawberry flavored iced drink"
+                            class="h-56 w-full rounded-2xl object-cover"
+                            loading="lazy"
+                        >
+
+                        <div class="mt-6 flex items-start justify-between gap-3">
+                            <div>
+                                <p class="eyebrow">09 / Milk Tea</p>
+                                <h3 class="mt-2 text-xl font-black">Strawberry Milk Tea</h3>
+                            </div>
+                            <span class="rounded-full bg-caramel/25 px-3 py-2 text-sm font-black">₱95</span>
+                        </div>
+
+                        <p class="mt-3 flex-1 leading-7 text-coffee-light dark:text-dark-muted">
+                            Sweet strawberry flavor combined with creamy milk tea.
+                        </p>
+                        <a href="#contact" class="mt-5 font-bold text-coffee-light dark:text-caramel">Ask About This Drink ↗</a>
+                    </article>
+
+                    <!-- 10 / OREO MILK TEA -->
+                    <article class="menu-card flex flex-col">
+                        <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe-8zrw8nEnOltnc2v8uE-smY-u7q6M-JIz9YXTPIjTg&s=10"
+                            alt="Creamy cookies and cream milk tea"
+                            class="h-56 w-full rounded-2xl object-cover"
+                            loading="lazy"
+                        >
+
+                        <div class="mt-6 flex items-start justify-between gap-3">
+                            <div>
+                                <p class="eyebrow">10 / Milk Tea</p>
+                                <h3 class="mt-2 text-xl font-black">Oreo Milk Tea</h3>
+                            </div>
+                            <span class="rounded-full bg-caramel/25 px-3 py-2 text-sm font-black">₱100</span>
+                        </div>
+
+                        <p class="mt-3 flex-1 leading-7 text-coffee-light dark:text-dark-muted">
+                            Creamy milk tea with a rich cookies-and-cream twist.
+                        </p>
+                        <a href="#contact" class="mt-5 font-bold text-coffee-light dark:text-caramel">Ask About This Drink ↗</a>
+                    </article>
+
+                </div>
+
+                <p class="mt-6 text-sm text-coffee-light dark:text-dark-muted">
+                    Prices are examples for this student project.
+                </p>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="reveal px-5 py-16 dark:bg-espresso md:px-8 md:py-24">
+            <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2">
+
+                <div class="flex flex-col justify-center">
+                    <p class="eyebrow">03 / Say Hello</p>
+                    <h2 class="mt-4 text-4xl font-black leading-tight md:text-5xl">
+                        Let's make your day a little sweeter.
+                    </h2>
+                    <p class="mt-5 leading-8 text-coffee-light dark:text-dark-muted">
+                        Have a question about our menu? Send us a message.
+                    </p>
+
+                    <div class="mt-8 flex items-center gap-4">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-caramel/20 text-2xl">🧋</div>
+                        <div>
+                            <p class="font-bold">BREW & BOBA</p>
+                            <p class="text-sm text-coffee-light dark:text-dark-muted">Coffee, milk tea, and good vibes.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="contact-form" class="menu-card">
+                    <div class="mb-6">
+                        <label for="name" class="mb-2 block text-sm font-bold">Your Name</label>
+                        <input id="name" name="name" type="text" required
+                               autocomplete="name" placeholder="Enter your name"
+                               class="w-full rounded-2xl border border-coffee/20 bg-cream px-4 py-3 text-coffee dark:border-white/15 dark:bg-espresso dark:text-dark-text">
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="email" class="mb-2 block text-sm font-bold">Email Address</label>
+                        <input id="email" name="email" type="email" required
+                               autocomplete="email" placeholder="you@example.com"
+                               class="w-full rounded-2xl border border-coffee/20 bg-cream px-4 py-3 text-coffee dark:border-white/15 dark:bg-espresso dark:text-dark-text">
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="message" class="mb-2 block text-sm font-bold">Your Message</label>
+                        <textarea id="message" name="message" rows="5" required
+                                  placeholder="Write your message here..."
+                                  class="w-full rounded-2xl border border-coffee/20 bg-cream px-4 py-3 text-coffee dark:border-white/15 dark:bg-espresso dark:text-dark-text"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary w-full">Send Your Message ↗</button>
+
+                    <p id="form-note" class="mt-4 text-sm leading-6 text-coffee-light dark:text-dark-muted" aria-live="polite">
+                        Demo form only. Messages are not sent or stored.
+                    </p>
+                </form>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-coffee/10 px-5 py-8 dark:border-white/10 md:px-8">
+        <div class="mx-auto flex max-w-7xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <a href="#home" class="text-lg font-black">BREW <span class="text-caramel">&</span> BOBA</a>
+            <p class="text-sm text-coffee-light dark:text-dark-muted">Brewed with love. Served with happiness.</p>
+            <p class="text-sm text-coffee-light dark:text-dark-muted">
+                © <span id="current-year"></span> BREW & BOBA.
+            </p>
+        </div>
+    </footer>
+
+    <!-- GSAP and ScrollTrigger -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+
+    <!-- Your separate JavaScript file -->
+    <script src="./script.js"></script>
+
+</body>
+</html>
